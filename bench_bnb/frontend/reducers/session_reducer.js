@@ -2,10 +2,11 @@ import { RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER } from "../actions/session_ac
 const defaultState = { currentUserId: null };
 
 export default (state = {}, action) => {
+
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      return { currentUserId: action.user.id };
+      return { currentUserId: action.currentUser.id };
     case LOGOUT_CURRENT_USER:
       return defaultState;
     default:
