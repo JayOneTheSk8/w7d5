@@ -2,14 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root';
-import * as Actions from './actions/session_actions';//TEST
-
+// not updating immediately
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
-  const store = configureStore();
-  window.login = Actions.login; //TEST
-  window.signup = Actions.signup; //TEST
-  window.getState = store.getState; //TEST
-  window.dispatch = store.dispatch; //TEST
+  let store;
+  if (window.currentUser) {
+    const preloadedState = {
+      entities: {
+        users: { [window.currentUser.id]: window.currentUser }
+      },
+      session: { currentUserId: window.currentUser.id }
+    };
+    store = configureStore(preloadedState);
+    delete window.currentUser;
+  } else {
+    store = configureStore();
+  }
   ReactDOM.render(<Root store={store}/>, root);
 });

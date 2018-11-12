@@ -10,7 +10,6 @@ class SessionForm extends React.Component {
       password: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderErrors = this.renderErrors.bind(this);
   }
 
   handleSubmit(e) {
@@ -27,8 +26,8 @@ class SessionForm extends React.Component {
 
   renderErrors() {
     if (this.props.errors.length === 0) { return; }
-    const allErrors = this.props.errors.map(error => {
-      return (<li>{error}</li>);
+    const allErrors = this.props.errors.map((error, idx) => {
+      return (<li key={idx}>{error}</li>);
     });
     return (
       <ul>

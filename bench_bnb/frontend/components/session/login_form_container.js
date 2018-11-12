@@ -4,7 +4,7 @@ import SessionForm from './session_form.jsx';
 
 const msp = (state) => {
   return {
-    errors: [],
+    errors: state.errors.session,
     formType: 'login',
     loggedIn: Boolean(state.session.currentUserId)
   };
